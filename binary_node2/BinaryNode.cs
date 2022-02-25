@@ -47,13 +47,13 @@
                 return thisValue;
             }
 
-            var indention = $"{spaces}  ";
-            var left = GetChildStringOrNone(LeftChild, indention);
-            var right = GetChildStringOrNone(RightChild, indention);
+            var indentation = $"{spaces}  ";
+            var left = GetChildStringOrNone(LeftChild, indentation);
+            var right = GetChildStringOrNone(RightChild, indentation);
             return $"{thisValue}\n{left}\n{right}"; 
         }
 
-        private string GetChildStringOrNone(BinaryNode<T> child, string indentation)
+        private string GetChildStringOrNone(BinaryNode<T>? child, string indentation)
             => child?.ToString(indentation) ?? $"{indentation}None";
     }
 }
