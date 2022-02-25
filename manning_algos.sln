@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "binary_node2", "binary_node
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "nary_node2", "nary_node2\nary_node2.csproj", "{6534BBA0-632A-4965-94BE-21324BB2CF2F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "binary_node3", "binary_node3\binary_node3.csproj", "{72C9779D-4DD0-45F7-A434-EE974FDD53DD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "nary_node3", "nary_node3\nary_node3.csproj", "{A70A2544-1787-4899-89E8-265BD82D8029}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{6534BBA0-632A-4965-94BE-21324BB2CF2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6534BBA0-632A-4965-94BE-21324BB2CF2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6534BBA0-632A-4965-94BE-21324BB2CF2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72C9779D-4DD0-45F7-A434-EE974FDD53DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72C9779D-4DD0-45F7-A434-EE974FDD53DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72C9779D-4DD0-45F7-A434-EE974FDD53DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72C9779D-4DD0-45F7-A434-EE974FDD53DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A70A2544-1787-4899-89E8-265BD82D8029}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A70A2544-1787-4899-89E8-265BD82D8029}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A70A2544-1787-4899-89E8-265BD82D8029}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A70A2544-1787-4899-89E8-265BD82D8029}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
