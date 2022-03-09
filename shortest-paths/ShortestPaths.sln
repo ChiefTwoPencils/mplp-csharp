@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetworkClasses", "NetworkCl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DrawingNetworks", "DrawingNetworks\DrawingNetworks.csproj", "{03F226EB-57DB-4D3C-B5A2-EEE34F1F93D8}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestNetworks", "TestNetworks\TestNetworks.csproj", "{867B3D61-4DCB-4422-963E-6719013ECAF8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{03F226EB-57DB-4D3C-B5A2-EEE34F1F93D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03F226EB-57DB-4D3C-B5A2-EEE34F1F93D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03F226EB-57DB-4D3C-B5A2-EEE34F1F93D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{867B3D61-4DCB-4422-963E-6719013ECAF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{867B3D61-4DCB-4422-963E-6719013ECAF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{867B3D61-4DCB-4422-963E-6719013ECAF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{867B3D61-4DCB-4422-963E-6719013ECAF8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
