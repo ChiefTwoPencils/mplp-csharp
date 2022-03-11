@@ -18,9 +18,7 @@ namespace TopologicalSorting
                 // Give each task a followers list that holds
                 // references to the tasks that must follow it.
                 // I.e. this task is a prerequisite for tasks in the followers list.
-                task.Followers = tasks
-                    .Where(t => t.PrereqTasks.Any(pt => pt.Index == task.Index))
-                    .ToList();
+                task.PrereqTasks.ForEach(prereq => prereq.Followers.Add(task));
 
                 // Set PrereqCount to the number of prerequisites this task has.
                 task.ResetPrereqCount();
@@ -47,7 +45,7 @@ namespace TopologicalSorting
                     {
                         // Decrement the follower’s prereqCount.
                         // If the follower’s prereqCount is now 0, add it to readyTasks.
-                        if ((task.PrereqCount -= 1) == 0) readyTasks.Enqueue(task);                        
+                        if ((--task.PrereqCount) == 0) readyTasks.Enqueue(task);                        
                     });                
             }
 
