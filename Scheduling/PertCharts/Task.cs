@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Prereqs = System.Collections.Generic.List<PertCharts.Task>;
 using Followers = System.Collections.Generic.List<PertCharts.Task>;
+using System.Windows;
 
 namespace PertCharts
 {
@@ -17,6 +18,24 @@ namespace PertCharts
         public List<int> PrereqNumbers { get; set; } = new();
         internal Prereqs PrereqTasks  { get; set; } = new ();
         internal Followers Followers { get; set; } = new ();
+
+        private Rect _bounds;
+        internal Rect Bounds
+        {
+            get => _bounds;
+            set
+            {
+                _bounds = value;
+
+                var halfWidth = _bounds.Width / 2;
+                var halfHeight = _bounds.Height / 2;
+                var x = _bounds.Left + halfWidth;
+                var y = _bounds.Top + halfHeight;
+
+                Center = new Point(x, y);
+            }
+        }
+        internal Point Center { get; private set; }
 
         internal Task(string name, int index, List<int> prereqNumbers)
         {
