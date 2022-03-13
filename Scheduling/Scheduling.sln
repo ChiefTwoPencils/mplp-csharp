@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TopologicalSorting", "TopologicalSorting\TopologicalSorting.csproj", "{1C3158B1-081D-45C4-B085-C80CED3C1B2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TopologicalSorting", "TopologicalSorting\TopologicalSorting.csproj", "{1C3158B1-081D-45C4-B085-C80CED3C1B2E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PertCharts", "PertCharts\PertCharts.csproj", "{64B0A73F-D2FA-40E7-9A0F-ED2CE5EFE462}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PertCharts", "PertCharts\PertCharts.csproj", "{64B0A73F-D2FA-40E7-9A0F-ED2CE5EFE462}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CriticalPaths", "CriticalPaths\CriticalPaths.csproj", "{69C6B2BD-1D27-484F-9CFD-567002211B88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{64B0A73F-D2FA-40E7-9A0F-ED2CE5EFE462}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64B0A73F-D2FA-40E7-9A0F-ED2CE5EFE462}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64B0A73F-D2FA-40E7-9A0F-ED2CE5EFE462}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69C6B2BD-1D27-484F-9CFD-567002211B88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69C6B2BD-1D27-484F-9CFD-567002211B88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69C6B2BD-1D27-484F-9CFD-567002211B88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69C6B2BD-1D27-484F-9CFD-567002211B88}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
