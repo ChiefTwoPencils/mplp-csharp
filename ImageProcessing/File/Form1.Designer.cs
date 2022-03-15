@@ -57,9 +57,9 @@
             this.mnuPointColorTone = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPointSaturate = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuEnhancements = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuEnhancementsBrightness = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuEnhancementsColor = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuEnhancementsContrast = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuEnhancementsBrightness = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFilters = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFiltersBoxBlur = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFiltersUnsharpMask = new System.Windows.Forms.ToolStripMenuItem();
@@ -86,7 +86,8 @@
             this.mnuFilters});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(584, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(681, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -311,26 +312,26 @@
             this.mnuEnhancements.Size = new System.Drawing.Size(97, 20);
             this.mnuEnhancements.Text = "&Enhancements";
             // 
+            // mnuEnhancementsBrightness
+            // 
+            this.mnuEnhancementsBrightness.Name = "mnuEnhancementsBrightness";
+            this.mnuEnhancementsBrightness.Size = new System.Drawing.Size(138, 22);
+            this.mnuEnhancementsBrightness.Text = "&Brightness...";
+            this.mnuEnhancementsBrightness.Click += new System.EventHandler(this.mnuEnhancementsBrightness_Click);
+            // 
             // mnuEnhancementsColor
             // 
             this.mnuEnhancementsColor.Name = "mnuEnhancementsColor";
-            this.mnuEnhancementsColor.Size = new System.Drawing.Size(152, 22);
+            this.mnuEnhancementsColor.Size = new System.Drawing.Size(138, 22);
             this.mnuEnhancementsColor.Text = "&Color...";
             this.mnuEnhancementsColor.Click += new System.EventHandler(this.mnuEnhancementsColor_Click);
             // 
             // mnuEnhancementsContrast
             // 
             this.mnuEnhancementsContrast.Name = "mnuEnhancementsContrast";
-            this.mnuEnhancementsContrast.Size = new System.Drawing.Size(152, 22);
+            this.mnuEnhancementsContrast.Size = new System.Drawing.Size(138, 22);
             this.mnuEnhancementsContrast.Text = "C&ontrast...";
             this.mnuEnhancementsContrast.Click += new System.EventHandler(this.mnuEnhancementsContrast_Click);
-            // 
-            // mnuEnhancementsBrightness
-            // 
-            this.mnuEnhancementsBrightness.Name = "mnuEnhancementsBrightness";
-            this.mnuEnhancementsBrightness.Size = new System.Drawing.Size(152, 22);
-            this.mnuEnhancementsBrightness.Text = "&Brightness...";
-            this.mnuEnhancementsBrightness.Click += new System.EventHandler(this.mnuEnhancementsBrightness_Click);
             // 
             // mnuFilters
             // 
@@ -398,7 +399,8 @@
             // resultPictureBox
             // 
             this.resultPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.resultPictureBox.Location = new System.Drawing.Point(12, 27);
+            this.resultPictureBox.Location = new System.Drawing.Point(14, 31);
+            this.resultPictureBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.resultPictureBox.Name = "resultPictureBox";
             this.resultPictureBox.Size = new System.Drawing.Size(100, 100);
             this.resultPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -418,14 +420,15 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 361);
+            this.ClientSize = new System.Drawing.Size(681, 417);
             this.Controls.Add(this.resultPictureBox);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "Form1";
-            this.Text = "image_processor";
+            this.Text = "File";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

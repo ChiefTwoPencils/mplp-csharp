@@ -91,7 +91,8 @@ namespace File
         // Restore the original unmodified image.
         private void mnuFileReset_Click(object sender, EventArgs e)
         {
-
+            CurrentBm = (Bitmap)OriginalBm.Clone();
+            resultPictureBox.Image = CurrentBm;
         }
 
         // Make a montage of files.
@@ -114,7 +115,40 @@ namespace File
         // Make a montage of files, four per row.
         private Bitmap MakeMontage(string[] filenames, Color bgColor)
         {
-            return null;
+            var rows = (int) Math.Ceiling(filenames.Length / 4.0);
+            var maxWidth = 0;
+            var maxHeight = 0;
+            var bms = new List<Bitmap>();
+            foreach (var filename in filenames)
+            {
+                var bm = LoadBitmapUnlocked(filename);
+                maxWidth = Math.Max(maxWidth, bm.Width);
+                maxHeight = Math.Max(maxHeight, bm.Height);
+                bms.Add(bm);
+            }
+
+            var widthMultiplier = bms.Count < 4 ? bms.Count : 4;
+            var result = new Bitmap(maxWidth * widthMultiplier, maxHeight * rows);
+            var graphics = Graphics.FromImage(result);
+            graphics.Clear(bgColor);
+
+            var x = -maxWidth;
+            var y = -maxHeight;
+            for (var i = 0; i < bms.Count; i++)
+            {
+                if (i % 4 == 0)
+                {
+                    x = 0;
+                    y += maxHeight;
+                }
+                else
+                {
+                    x += maxWidth;
+                }
+                graphics.DrawImage(bms[i], new Rectangle(x, y, maxWidth, maxHeight));
+            }
+
+            return result;
         }
 
         private void mnuFileExit_Click(object sender, EventArgs e)
