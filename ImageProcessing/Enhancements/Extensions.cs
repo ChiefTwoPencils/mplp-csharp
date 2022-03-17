@@ -100,7 +100,7 @@ namespace Enhancements
             var copy = new Bitmap(selection.Width, selection.Height);            
             var points = new Point[]
             {
-                new Point(0, 0),
+                new Point(0, 0),        
                 new Point(selection.Width - 1, 0),
                 new Point(0, selection.Height - 1)
             };
@@ -113,7 +113,7 @@ namespace Enhancements
         }
 
         public static Rectangle ToRectangle(this Point left, Point right)
-            => new(Min(left.X, right.X), Min(left.Y, right.Y), Abs(left.X - right.X), Abs(left.Y - right.Y));
+            => new(Min(left.X, right.X), Min(left.Y, right.Y), Abs(left.X - right.X), Abs(left.Y - right.Y));   
 
         public static void DrawDashedRectangle(this Graphics graphics, Color first, Color second, float thickness, float dash, Point left, Point right)
         {
@@ -126,5 +126,7 @@ namespace Enhancements
             pen.Color = second;
             graphics.DrawRectangle(pen, rectangle);
         }
+
+        public static byte ToByte(this float f) => (byte) (f < 0 ? 0 : f > 255 ? 255 : Math.Round(f));
     }
 }
