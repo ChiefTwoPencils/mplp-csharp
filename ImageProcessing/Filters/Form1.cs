@@ -592,11 +592,23 @@ namespace Filters
 
         private void mnuFiltersBoxBlur_Click(object sender, EventArgs e)
         {
-
+            var radius = InputForm.GetInt("Integer input!", "Enter an integer!", "0", 0, int.MaxValue, "Invalid integer value!");
+            CurrentBm = CurrentBm.BoxBlur(radius);
+            resultPictureBox.Refresh();
         }
 
         private void mnuFiltersUnsharpMask_Click(object sender, EventArgs e)
         {
+            var input = InputForm.GetString("String input!", "Enter a radius and amount separated by a comma (,)", "0,0");
+            var parts = input
+                .Split(',', ' ', StringSplitOptions.RemoveEmptyEntries)
+                .Select(int.Parse)
+                .ToList();
+            var radius = parts[0];
+            var amount = parts[1];
+
+            CurrentBm = CurrentBm.UnsharpMask(radius, amount);
+            resultPictureBox.Refresh();
 
         }
 
@@ -631,6 +643,11 @@ namespace Filters
         #endregion Filters
 
         private void sfdFile_FileOk(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
         }

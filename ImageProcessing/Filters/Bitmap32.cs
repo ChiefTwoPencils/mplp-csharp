@@ -3,6 +3,8 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
+using static System.Math;
+
 namespace Filters
 {
     public class Bitmap32
@@ -11,6 +13,8 @@ namespace Filters
         public byte[] ImageBytes;
         public int RowSizeBytes;
         public const int PixelDataSize = 32;
+
+        public Bitmap BitMap { get; private set; }
 
         // A reference to the Bitmap.
         private Bitmap m_Bitmap;
@@ -131,6 +135,70 @@ namespace Filters
             // Release resources.
             ImageBytes = null;
             m_BitmapData = null;
+        }
+
+        public static Bitmap32 operator -(Bitmap32 first, Bitmap32 second)
+            => ApplyOp(first, second, (one, two) => (one - two).ToByte());
+
+        public static Bitmap32 operator +(Bitmap32 first, Bitmap32 second)
+            => ApplyOp(first, second, (one, two) => (one + two).ToByte());
+
+        public static Bitmap32 operator *(Bitmap32 bm, float f)
+        {
+            byte mul(byte c, float f) => (c * f).ToByte();
+
+            bm.LockBitmap();
+
+            for (var x = 0; x < bm.Width; x++)
+            {
+                for (var y = 0; y < bm.Height; y++)
+                {
+                    bm.GetPixel(x, y, out var r, out var g, out var b, out var a);
+                    r = mul(r, f);
+                    g = mul(g, f);
+                    b = mul(b, f);
+                    a = mul(a, f);
+                    bm.SetPixel(x, y, r, g, b, a);
+                }
+            }           
+
+            bm.UnlockBitmap();
+            return bm;
+        }
+
+        public static Bitmap32 operator *(float f, Bitmap32 bm) => bm * f;
+
+        private static Bitmap32 ApplyOp(Bitmap32 first, Bitmap32 second, Func<byte, byte, byte> op)
+        {
+            var width = Min(first.Width, second.Width);
+            var height = Min(first.Height, second.Height);
+            var b32 = new Bitmap32(new Bitmap(width, height));
+
+            first.LockBitmap();
+            second.LockBitmap();
+            b32.LockBitmap();
+
+            for (var x = 0; x < width; x++)
+            {
+                for (var y = 0; y < height; y++)
+                {
+                    first.GetPixel(x, y, out var fr, out var fg, out var fb, out var fa);
+                    second.GetPixel(x, y, out var sr, out var sg, out var sb, out var sa);
+
+                    var r = op(fr, sr);
+                    var g = op(fg, sg);
+                    var b = op(fb, sb);
+                    var a = op(fa, sa);
+
+                    b32.SetPixel(x, y, r, g, b, a);
+                }
+            }
+
+            first.UnlockBitmap();
+            second.UnlockBitmap();
+            b32.UnlockBitmap();
+
+            return b32;
         }
     }
 }

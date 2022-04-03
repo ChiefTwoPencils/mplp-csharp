@@ -41,6 +41,141 @@ namespace Filters
             }
         }
 
+        public static Bitmap ApplyKernel(this Bitmap bm, float[,] kernel, float weight, float offset)
+        {
+            byte calcNew(float total) => (total / weight + offset).ToByte();
+
+            var kRows = kernel.GetLength(0);
+            var kCols = kernel.GetLength(1);
+
+            if (kRows % 2 == 0 || kCols % 2 == 0) throw new Exception("Kernels have odd rows and columns");
+
+            var width = bm.Width;
+            var height = bm.Height;
+            var @new = new Bitmap(width, height);
+            using var graphics = Graphics.FromImage(@new);
+            var og32 = new Bitmap32(bm);
+            var new32 = new Bitmap32(@new);
+
+            og32.LockBitmap();
+            new32.LockBitmap();
+            graphics.Clear(Color.Black);
+
+            var xradius = kRows / 2;
+            var yradius = kCols / 2;
+            for (var x = 0; x < width; x++)
+            {
+                for (var y = 0; y < height; y++)
+                {
+                    var rTotal = 0f;
+                    var gTotal = 0f;
+                    var bTotal = 0f;
+                    for (var dx = -xradius; dx <= xradius; dx++)
+                    {
+                        for (var dy = -yradius; dy <= yradius; dy++)
+                        {
+                            var sourceX = x + dx;
+                            if (sourceX < 0) sourceX = 0;
+                            if (sourceX >= width) sourceX = width - 1;
+
+                            var sourceY = y + dy;
+                            if (sourceY < 0) sourceY = 0;
+                            if (sourceY >= height) sourceY = height - 1;
+
+                            og32.GetPixel(sourceX, sourceY, out var r, out var g, out var b, out var _);
+
+                            var scale = kernel[dy + yradius, dx + xradius];
+                            rTotal += r * scale;
+                            gTotal += g * scale;
+                            bTotal += b * scale;
+                        }
+                    }                    
+
+                    var nr = calcNew(rTotal);
+                    var ng = calcNew(gTotal);
+                    var nb = calcNew(bTotal);
+
+                    new32.SetPixel(x, y, nr, ng, nb, 255);
+                }
+            }
+
+            og32.UnlockBitmap();
+            new32.UnlockBitmap();
+
+            return @new;
+        }
+
+        public static Bitmap BoxBlur(this Bitmap bm, int radius)
+        {
+            var ones = OnesArray(radius);
+            var weight = ones.GetLength(0) * ones.GetLength(1);
+
+            return bm.ApplyKernel(ones, weight, 0);
+        }
+
+        // Perform unsharp masking.
+        // sharpened = original + (original - blurred) × amount.
+        public static Bitmap UnsharpMask(this Bitmap bm, int radius, float amount)
+        {
+            var blurred = bm.BoxBlur(radius);
+            var og32 = new Bitmap32(bm);
+            var blurred32 = new Bitmap32(blurred);
+            var result32 = og32 + (og32 - blurred32) * amount;
+
+            return result32.BitMap;
+        }
+
+        public static Bitmap RankFilter(this Bitmap bm, int xradius, int yradius, int rank)
+        {
+            var result = new Bitmap(bm.Width, bm.Height);
+            var graphics = Graphics.FromImage(result);
+            var o32 = new Bitmap32(bm);
+            var r32 = new Bitmap32(result);
+
+            graphics.Clear(Color.Black);
+            o32.LockBitmap();
+            r32.LockBitmap();
+
+            for (var x = 0; x < o32.Width; x++)
+            {
+                for (var y = 0; y < o32.Height; y++)
+                {
+                    var pixels = new List<PixelData>();
+                    for (var dx = -xradius; dx <= xradius; dx++)
+                    {
+                        for (var dy = -yradius; dy <= yradius; dy++)
+                        {
+                            var sourceX = x + dx;
+                            if (sourceX < 0) sourceX = 0;
+                            else if (sourceX >= bm.Width) sourceX = bm.Width -1;
+
+                            var sourceY = y + dy;
+                            if (sourceY < 0) sourceY = 0;
+                            else if (sourceY >= bm.Height) sourceY = bm.Height -1;
+
+                            o32.GetPixel(dx, dy, out var r, out var g, out var b, out var a);
+                            pixels.Add(new PixelData(r, g, b, a));
+                        }
+                    }
+
+                    pixels = pixels
+                        .OrderBy(pixel => pixel.Brightness)
+                        .ToList();
+
+                    if (rank < 0) rank = 0;
+                    if (rank > pixels.Count) rank = pixels.Count - 1;
+
+                    var p = pixels.ElementAt(rank);
+                    r32.SetPixel(x, y, p.R, p.G, p.B, p.A);
+                }
+            }
+
+            o32.UnlockBitmap();
+            r32.UnlockBitmap();
+
+            return result;
+        }
+
         public static void ApplyPointOp(this Bitmap bm, PointOp op)
         {
             var b32 = new Bitmap32(bm);
@@ -127,6 +262,24 @@ namespace Filters
             graphics.DrawRectangle(pen, rectangle);
         }
 
-        public static byte ToByte(this float f) => (byte) (f < 0 ? 0 : f > 255 ? 255 : Math.Round(f));
+        public static byte ToByte(this float f) => (byte) (f < 0 ? 0 : f > 255 ? 255 : Round(f));
+
+        public static byte ToByte(this int i) => (byte) (int) ToByte((float) i);
+
+        private static float[,] OnesArray(int radius)
+        {
+            var width = 2 * radius + 1;
+            var array = new float[width, width];
+
+            for (var i = 0; i < width; i++)
+            {
+                for (var j = 0; j < width; j++)
+                {
+                    array[i, j] = 1;
+                }
+            }
+
+            return array;
+        }
     }
 }
