@@ -5,6 +5,8 @@ VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneratingTestNetworks", "GeneratingTestNetworks\GeneratingTestNetworks.csproj", "{53863281-D2F0-4390-8AEB-381B269043EA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindFlows", "FindFlows\FindFlows.csproj", "{392D509F-84AE-44B4-97EB-602D712F81BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{53863281-D2F0-4390-8AEB-381B269043EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53863281-D2F0-4390-8AEB-381B269043EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53863281-D2F0-4390-8AEB-381B269043EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{392D509F-84AE-44B4-97EB-602D712F81BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{392D509F-84AE-44B4-97EB-602D712F81BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{392D509F-84AE-44B4-97EB-602D712F81BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{392D509F-84AE-44B4-97EB-602D712F81BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
